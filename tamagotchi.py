@@ -1,64 +1,74 @@
 class Tamagotchi:
+    nombre=""
     animo=0
     hambre=0
     energia=0
 
-    def __init__(self,animo,hambre,energia):
+    def __init__(self,nombre,animo,hambre,energia):
+        self.nombre=nombre
         self.animo=animo
         self.hambre=hambre
         self.energia=energia
 
-    def jugar(self):
-        if self.energia<=0:
-            print("Game Over")
-        else:
-            print("Jugar")
-            self.animo+=1
-            self.energia-=1
+    def jugar(self):        
+        self.animo+=1
+        self.energia-=1
 
-    def alimentar(self):
-        if self.energia<=0:
-            print("Game Over")
-        else:
-            print("Alimentar")
-            self.energia+=1
-            self.hambre-=1
+    def alimentar(self):        
+        self.animo+=1
+        self.hambre-=1
 
-    def dormir(self):
-        if self.energia<=0:
-            print("Game Over")
-        else:
-            print("Dormir")
-            self.energia+=1
-            self.hambre+=1
+    def dormir(self):        
+        self.energia+=1
+        self.hambre+=1
 
-    def pasar(self):
-        if self.energia<=0:
-            print("Game Over")
-        else:
-            print("Pasar tiempo")
-            self.energia-=1
-            self.hambre+=1
-            self.animo-=1
+    def pasar(self):        
+        self.energia-=1
+        self.hambre+=1
+        self.animo-=1
 
     def __str__(self):
         return ("Animo: %d Hambre: %d Energia: %d" %(self.animo,self.hambre,self.energia))
+    
 
-    def mostrarEstado(self):
-        print ("Animo: %d Hambre: %d Energia: %d" %(self.animo,self.hambre,self.energia))
+# Programa principal
 
-t1 = Tamagotchi(20,0,82)
-t2 = Tamagotchi(25,10,60)
+# Menu
+t=Tamagotchi("Tamagotchito",10,10,10)
+opcion=999
+while opcion != 0:
+    print("\t\t\tMenu de opciones")
+    print("\t\t\t0 Salir")
+    print("\t\t\t1 Crear tamagotchi")
+    print("\t\t\t2 Jugar")
+    print("\t\t\t3 Alimentar")
+    print("\t\t\t4 Pasar tiempo")
+    print("\t\t\t5 Dormir")
+    
+    if t.energia<=0:
+        print("*********************Game over**************************")
+        opcion=0
+    else:
+        opcion=int(input("\t\t\tIngrese una opcion:"))
+    
+    if opcion==0:
+        print("*********************Chau********************************")
+    elif opcion==1:
+        nom=input("Ingrese nombre:")
+        t=Tamagotchi(nom,10,10,10)
+        print(t)    
+    elif opcion==2:  #jugar
+        t.jugar()
+        print(t)
+    elif opcion==3:  #Alimentar
+        t.alimentar()
+        print(t)
+    elif opcion==4:  # Pasar tiempo
+        t.pasar()
+        print(t)
+    elif opcion==5:  # Dormir
+        t.dormir()
+        print(t)
+    else:  #error
+        print("opcion erronea")
 
-
-print(t1)
-# t1.mostrarEstado()
-# ambos hacen lo mismo, mostar el estado del tamagotchi
-
-t1.jugar()
-print(t1)
-t1.pasar()
-t1.pasar()
-t1.dormir()
-t1.pasar()
-print(t1)
